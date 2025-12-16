@@ -4,6 +4,19 @@ const app = express();
 const path = require('path');
 const { Pool } = require('pg');
 
+// Servidor Express
+const express = require('express');
+const app = express();
+const path = require('path');
+const { Pool } = require('pg');
+
+// Adicionado para forçar um novo deploy limpo no Render
+// const DUMMY_FIX = true; <--- ADICIONE ESTA LINHA E SALVE!
+
+// Configurações e Middlewares
+app.use(express.json());
+// ... o resto do código
+
 // Configurações e Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
