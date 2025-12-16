@@ -1,48 +1,50 @@
-// Servidor Express
+// Dependências
 const express = require('express');
 const app = express();
 const path = require('path');
 const { Pool } = require('pg');
-
-// Servidor Express
-const express = require('express');
-const app = express();
-const path = require('path');
-const { Pool } = require('pg');
-
-// Adicionado para forçar um novo deploy limpo no Render
-// const DUMMY_FIX = true; <--- ADICIONE ESTA LINHA E SALVE!
-
-// Configurações e Middlewares
-app.use(express.json());
-// ... o resto do código
 
 // Configurações e Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Definindo a porta do servidor (usa a porta do Render ou 5000)
+// Definindo a porta do servidor
 const PORT = process.env.PORT || 5000;
 
-// Configuração do Banco de Dados PostgreSQL (usando a variável de ambiente do Render)
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false // Necessário para conexões com o Render
+// Configuração Condicional do Banco de Dados PostgreSQL
+// Isso garante que o servidor funcione mesmo se a DATABASE_URL estiver ausente ou incorreta.
+let pool = null;
+if (process.env.DATABASE_URL) {
+    try {
+        pool = new Pool({
+            connectionString: process.env.DATABASE_URL,
+            ssl: {
+                rejectUnauthorized: false
+            }
+        });
+        console.log('PostgreSQL: Conexão configurada via DATABASE_URL.');
+    } catch (error) {
+        console.error('Erro ao configurar Pool de conexão do PostgreSQL:', error.message);
     }
-});
+} else {
+    console.log('PostgreSQL: DATABASE_URL não encontrada. O Banco de Dados não será usado.');
+}
 
-// --- Rota Principal: Serve a Página de Vendas Corrigida ---
-// O arquivo edu.html utiliza o Formspree e Hotmart, não precisando de rotas de backend adicionais.
+// --- Rota Principal: Serve a Página de Vendas (edu.html) ---
 app.get('/', (req, res) => {
-    // Certifique-se de que o arquivo HTML funcional está na sua pasta como "edu.html"
+    // Servirá o seu arquivo HTML que contém o formulário Formspree/Hotmart
     res.sendFile(path.join(__dirname, 'edu.html')); 
 });
 
 
-// --- Rota de Teste de Conexão com o Banco de Dados ---
-// Mantida para garantir que a variável DATABASE_URL está correta no Render
+// --- Rota de Teste de Conexão com o Banco de Dados (opcional) ---
 app.get('/api/teste-db', async (req, res) => {
+    if (!pool) {
+        return res.status(503).json({
+            status: 'warning',
+            message: 'Banco de Dados indisponível (DATABASE_URL ausente).'
+        });
+    }
     try {
         await pool.query('SELECT 1');
         res.status(200).json({
@@ -64,5 +66,4 @@ app.get('/api/teste-db', async (req, res) => {
 // --- Inicialização do Servidor ---
 app.listen(PORT, () => {
     console.log(`🚀 Servidor rodando na porta ${PORT}`);
-    console.log(`Acesse a aplicação em: http://localhost:${PORT}`);
 });
