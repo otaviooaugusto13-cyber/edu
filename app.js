@@ -15,20 +15,20 @@ const PORT = process.env.PORT || 5000;
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
-        rejectUnauthorized: false // Necessário para conexões com o Render/DigitalOcean
+        rejectUnauthorized: false // Necessário para conexões com o Render
     }
 });
 
 // --- Rota Principal: Serve a Página de Vendas Corrigida ---
+// O arquivo edu.html utiliza o Formspree e Hotmart, não precisando de rotas de backend adicionais.
 app.get('/', (req, res) => {
-    // ATENÇÃO: Verifique se o nome do arquivo HTML na sua pasta é "edu.html"
-    // Caso contrário, renomeie o arquivo HTML que você corrigiu para "edu.html"
+    // Certifique-se de que o arquivo HTML funcional está na sua pasta como "edu.html"
     res.sendFile(path.join(__dirname, 'edu.html')); 
 });
 
 
 // --- Rota de Teste de Conexão com o Banco de Dados ---
-// Esta rota é útil para garantir que a variável DATABASE_URL está correta
+// Mantida para garantir que a variável DATABASE_URL está correta no Render
 app.get('/api/teste-db', async (req, res) => {
     try {
         await pool.query('SELECT 1');
