@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Próxima Turma - [Nome do Produto]</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .container {
+            background-color: #222;
+            padding: 30px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #ffc107;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: #333;
+            color: #fff;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #ffc107;
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #e0a800;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>PRÓXIMA TURMA</h2>
+
+        <form 
+            action="[SEU ENDPOINT FORMREE AQUI]" 
+            method="POST"
+            id="hotmart-form"
+        >
+            <input type="text" name="nome" placeholder="Seu Nome" required>
+            <input type="email" name="email" placeholder="Seu Email" required>
+            <input type="text" name="telefone" placeholder="Seu Telefone/WhatsApp" required>
+
+            <input type="hidden" name="_next" value="[SUA URL DE CHECKOUT DA HOTMART AQUI]"> 
+            
+            <input type="hidden" name="_subject" value="Novo Lead - Landing Page Edu">
+
+            <button type="submit">FINALIZAR MINHA INSCRIÇÃO E IR PARA O PAGAMENTO</button>
+        </form>
+    </div>
+
+</body>
+</html>
