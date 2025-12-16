@@ -1,18 +1,21 @@
 {
-  "name": "minha-plataforma-backend",
+  "name": "edu-site",
   "version": "1.0.0",
-  "description": "Backend para plataforma de assinaturas",
+  "description": "Pagina de vendas Eduardo Severo",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "node",
+    "express",
+    "postgres"
+  ],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2",
-    "body-parser": "^1.20.2",
-    "path": "^0.12.7",
+    "express": "^4.19.2",
     "pg": "^8.11.3"
-    
-    // Adicione aqui quaisquer outras dependências que seu projeto usa (como 'dotenv', 'jsonwebtoken', 'stripe', etc.)
   }
 }
