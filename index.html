@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Próxima Turma - [Nome do Produto]</title>
+    <title>Página de Vendas - Próxima Turma</title>
     <style>
+        /* CSS INCLUIDO AQUI PARA GARANTIR QUE NÃO HÁ DEPENDÊNCIAS EXTERNAS */
         body {
             background-color: #000;
             color: #fff;
@@ -12,7 +13,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
             padding: 20px;
         }
         .container {
@@ -21,11 +23,13 @@
             border-radius: 8px;
             width: 100%;
             max-width: 400px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
         h2 {
             text-align: center;
             margin-bottom: 25px;
             color: #ffc107;
+            font-size: 1.5em;
         }
         input {
             width: 100%;
@@ -36,6 +40,7 @@
             box-sizing: border-box;
             background-color: #333;
             color: #fff;
+            font-size: 1em;
         }
         button {
             width: 100%;
@@ -46,7 +51,8 @@
             border-radius: 4px;
             cursor: pointer;
             font-weight: bold;
-            margin-top: 10px;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
         }
         button:hover {
             background-color: #e0a800;
@@ -56,22 +62,21 @@
 <body>
 
     <div class="container">
-        <h2>PRÓXIMA TURMA</h2>
+        <h2>RESERVE SUA VAGA E VÁ PARA O PAGAMENTO</h2>
 
         <form 
-            action="[SEU ENDPOINT FORMREE AQUI]" 
+            action="[COLOQUE SEU CÓDIGO FORMREE AQUI (Ex: https://formspree.io/f/xyznmr)]" 
             method="POST"
-            id="hotmart-form"
         >
-            <input type="text" name="nome" placeholder="Seu Nome" required>
-            <input type="email" name="email" placeholder="Seu Email" required>
+            <input type="text" name="nome" placeholder="Seu Nome Completo" required>
+            <input type="email" name="email" placeholder="Seu Melhor Email" required>
             <input type="text" name="telefone" placeholder="Seu Telefone/WhatsApp" required>
 
-            <input type="hidden" name="_next" value="[SUA URL DE CHECKOUT DA HOTMART AQUI]"> 
+            <input type="hidden" name="_next" value="https://pay.hotmart.com/Y103400130Y"> 
             
-            <input type="hidden" name="_subject" value="Novo Lead - Landing Page Edu">
+            <input type="hidden" name="_subject" value="Novo Lead Capturado - Landing Page">
 
-            <button type="submit">FINALIZAR MINHA INSCRIÇÃO E IR PARA O PAGAMENTO</button>
+            <button type="submit">FINALIZAR INSCRIÇÃO E IR PARA O PAGAMENTO</button>
         </form>
     </div>
 
