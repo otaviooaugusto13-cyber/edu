@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PRATICAMENTE — Alta Performance & Evolução da Mente</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* --- Variáveis de Estilo (Tema Escuro Premium) --- */
+    :root {
+      --bg-dark: #050505;      --bg-card: #121212;      --bg-card-hover: #1f1f1f;
+      --gold: #FFC107;         --text: #ffffff;         --text-secondary: #a3a3a3;
+      --border-subtle: #262626; --max-width: 1200px;    --section-spacing: 80px;
+    }
+
+    /* --- Reset e Bases --- */
+    * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .btn { font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
+    
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 20px; }
+    section { padding: var(--section-spacing) 0; }
+
+    /* --- Tipografia de Impacto --- */
+    h1 { font-size: 3.5rem; line-height: 1.1; font-weight: 800; margin-bottom: 20px; }
+    h1 span { color: var(--gold); display: block; }
+    
+    h2 { 
+      font-size: 2rem; 
+      border-left: 4px solid var(--gold); 
+      padding-left: 20px; 
+      margin-bottom: 40px; 
+      padding-top: 10px;
+    }
+    
+    p { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 30px; max-width: 500px; }
+    a { text-decoration: none; transition: 0.3s; }
+
+    /* --- Header e Navegação --- */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(5,5,5,0.9); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-subtle); padding: 15px 0;
+    }
+    .nav { display: flex; justify-content: space-between; align-items: center; }
+    .logo-img { height: 60px; width: auto; }
+
+    /* --- Botões --- */
+    .btn { display: inline-block; padding: 15px 30px; font-weight: 800; border-radius: 4px; transition: all 0.3s; text-align: center; }
+    .btn-gold { background: var(--gold); color: #000; margin-right: 15px; border: 2px solid var(--gold); }
+    .btn-gold:hover { background: #e0a800; transform: translateY(-3px); box-shadow: 0 10px 20px -10px rgba(255, 193, 7, 0.5); }
+    .btn-outline { border: 2px solid var(--text); color: var(--text); background: transparent; }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* --- HERO (Área da Montagem) --- */
+    .hero { display: flex; align-items: center; min-height: 85vh; padding: 60px 0; gap: 40px; }
+    .hero-content { flex: 1; }
+
+    /* CSS da Montagem */
+    .hero-image-wrapper {
+      flex: 1; position: relative; display: flex; justify-content: flex-end; height: 600px;
+    }
+    .montagem-container {
+      position: relative; width: 450px; height: 100%;
+    }
+    .img-corpo {
+      width: 100%; height: auto; object-fit: cover; filter: contrast(1.1) brightness(0.9);
+      mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    }
+    .img-rosto {
+      position: absolute; width: 130px; height: 140px; border-radius: 50%; object-fit: cover;
+      /* POSICIONAMENTO MANUAL - AJUSTE AQUI SE NECESSÁRIO */
+      top: 55px; left: 175px; 
+      z-index: 10; box-shadow: 0 10px 20px rgba(0,0,0,0.5); border: 2px solid rgba(0,0,0,0.2);
+    }
+    
+    /* --- Módulos (Grid) --- */
+    .grid-modules {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;
+    }
+    .card {
+      background: var(--bg-card); border: 1px solid var(--border-subtle); padding: 32px; border-radius: 8px; transition: 0.3s;
+    }
+    .card:hover { border-color: var(--gold); background: var(--bg-card-hover); transform: translateY(-5px); }
+    .module-number { color: var(--gold); font-weight: 700; font-family: 'Montserrat', sans-serif; display: block; margin-bottom: 12px; font-size: 0.9rem; }
+    .card h3 { color: var(--text); margin-bottom: 16px; font-size: 1.2rem; }
+    .card p { margin-bottom: 0; font-size: 1rem; }
+
+    /* --- Formulário e Inscrição --- */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    input, textarea {
+      width: 100%; padding: 18px; background: #1a1a1a; border: 1px solid #333; color: var(--text); border-radius: 4px; margin-bottom: 16px; font-size: 1rem;
+    }
+    #status-msg { margin-top: 15px; font-size: 1rem; color: var(--gold); font-weight: 700; }
+    
+    /* --- Footer --- */
+    footer { background: var(--bg-card); padding: 40px 0; text-align: center; border-top: 1px solid var(--border-subtle); margin-top: var(--section-spacing); }
+
+    /* --- Responsivo --- */
+    @media (max-width: 900px) {
+      
+      .logo-img { /* AJUSTE PARA O LOGO NO MOBILE */
+        height: 45px; 
+        max-width: 160px;
+      }
+      
+      header { 
+        padding: 10px 0; /* Ajusta o padding do header */
+      }
+      
+      .hero { flex-direction: column-reverse; text-align: center; }
+      .hero-image-wrapper { justify-content: center; height: auto; }
+      .montagem-container { width: 300px; }
+      .img-rosto { width: 85px; height: 95px; top: 38px; left: 118px; }
+      h1 { font-size: 2.5rem; }
+      .form-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <a href="#"><img src="logo.png" alt="PRATICAMENTE logo" class="logo-img"></a>
+      <a href="#inscricao" class="btn btn-gold" style="padding: 10px 20px; font-size: 14px;">INSCREVA-SE</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div class="hero-content">
+        <h1>NÃO REAJA.<br><span>ESCOLHA.</span></h1>
+        <p>Autoliderança e inteligência emocional para alta performance. Combine Estoicismo e Neurociência para dominar seu jogo mental.</p>
+        
+        <div>
+          <a href="#inscricao" class="btn btn-gold">QUERO ENTRAR NO JOGO</a>
+          <a href="#modulos" class="btn btn-outline">VER MÓDULOS</a>
+        </div>
+      </div>
+
+      <div class="hero-image-wrapper">
+        <div class="montagem-container">
+          <img src="joel.png" class="img-corpo" alt="Mentor em pose de poder">
+        </div>
+      </div>
+    </section>
+
+    <section id="modulos" class="container">
+      <h2>O Arsenal da Autoliderança</h2>
+      <div class="grid-modules">
+        <div class="card">
+          <span class="module-number">MÓDULO 01</span>
+          <h3>Base da Autoliderança</h3>
+          <p>Reconhecer emoções não é fraqueza, é inteligência estratégica. Controle x Consciência nas decisões.</p>
+        </div>
+        <div class="card">
+          <span class="module-number">MÓDULO 02: O Controle do Jogo Mental</span>
+          <h3>Mente Inabalável</h3>
+          <p>Domine a distinção crucial entre o que está sob seu controle e o que é apenas ruído externo. Aprenda exercícios de Serenidade Ativa e Visualização Estratégica para construir uma inabalável blindagem mental e focar onde o resultado acontece.</p>
+        </div>
+        <div class="card">
+          <span class="module-number">MÓDULO 03</span>
+          <h3>PNL e Regulação</h3>
+          <p>Ferramentas para hackear seu estado emocional. Ancoragem e ressignificação prática e imediata.</p>
+        </div>
+        <div class="card">
+          <span class="module-number">MÓDULO 04</span>
+          <h3>Eneagrama Estratégico</h3>
+          <p>Identifique seus padrões automáticos de sabotagem. O mapa definitivo das suas reações.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="inscricao" class="container">
+      <h2>Garanta sua vaga na próxima turma</h2>
+      <div class="form-grid">
+        <div>
+           <p style="font-size: 1.2rem; color: var(--text);">Você está a um passo de assumir o controle.</p>
+           <ul style="margin-top: 24px; padding-left: 0;">
+             <li style="margin-bottom:16px; display:flex; align-items:center;"><span style="color:var(--gold); margin-right:10px;">✓</span> Acesso vitalício ao conteúdo</li>
+             <li style="margin-bottom:16px; display:flex; align-items:center;"><span style="color:var(--gold); margin-right:10px;">✓</span> Ferramentas práticas em PDF</li>
+             <li style="margin-bottom:16px; display:flex; align-items:center;"><span style="color:var(--gold); margin-right:10px;">✓</span> Grupo exclusivo de networking</li>
+           </ul>
+           <div style="margin-top: 40px;">
+             <span style="display:block; font-size:0.9rem; color:var(--text-secondary);">Investimento:</span>
+             <span style="font-size: 2.5rem; font-weight:800; color:var(--gold);">R$ 497</span>
+             <span style="display:block; font-size:0.9rem; color:var(--text-secondary);">à vista ou 12x no cartão</span>
+           </div>
+        </div>
+
+        <div class="card" style="background: #1a1a1a;">
+          
+          <form id="form" action="https://formspree.io/f/mvgeyowq" method="POST"> 
+            
+            <input type="text" name="Nome Completo" placeholder="SEU NOME COMPLETO" required>
+            <input type="email" name="Email" placeholder="SEU MELHOR E-MAIL" required>
+            <input type="tel" name="WhatsApp" placeholder="SEU WHATSAPP (DDD + NÚMERO)" required>
+            
+            <button type="submit" class="btn btn-gold" style="width:100%; margin-top:16px;">
+              FINALIZAR MINHA INSCRIÇÃO E IR PARA O PAGAMENTO
+            </button>
+            <div id="status-msg"></div> 
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <img src="logo.png" alt="Logo Rodapé" style="height: 40px; margin: 0 auto 20px; opacity: 0.7;">
+      <p style="font-size: 0.9rem; color: #666;">© 2025 Eduardo Severo. Autoliderança e Alta Performance.<br>Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById('form');
+    const statusDiv = document.getElementById('status-msg');
+    
+    // Seu link de checkout da Hotmart
+    const checkoutLink = "https://pay.hotmart.com/Y103400130Y";
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      
+      const btn = form.querySelector('button[type="submit"]');
+      const originalText = btn.innerText;
+      
+      // 1. Mostrar status de processamento e desabilitar o botão
+      btn.innerText = "CAPTURA E REDIRECIONAMENTO...";
+      btn.disabled = true;
+      statusDiv.innerText = 'Por favor, aguarde...';
+      
+      // 2. Iniciar envio de dados para o Formspree
+      // Não esperamos a resposta 'await' para que o redirecionamento seja mais rápido
+      fetch(form.action, {
+        method: form.method,
+        body: new FormData(form),
+        headers: {
+            'Accept': 'application/json'
+        }
+      });
+      
+      // 3. Aguardar 50ms para garantir que o envio começou, e então redirecionar IMEDIATAMENTE.
+      setTimeout(() => {
+          statusDiv.innerText = "Redirecionando para a Hotmart...";
+          window.location.href = checkoutLink; // Redirecionamento Imediato
+      }, 50);
+
+    });
+  </script>
+</body>
+</html>

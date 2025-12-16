@@ -1,92 +1,55 @@
-// Importações de módulos essenciais
+// Servidor Express
 const express = require('express');
-const bodyParser = require('body-parser');
+const app = express();
 const path = require('path');
 const { Pool } = require('pg');
 
-// Configuração do Express
-const app = express();
+// Configurações e Middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// O Render injeta automaticamente a porta em process.env.PORT
-const PORT = process.env.PORT || 3000; 
+// Definindo a porta do servidor (usa a porta do Render ou 5000)
+const PORT = process.env.PORT || 5000;
 
-// --- Variáveis de Ambiente do Render ---
-// Obtidas de forma segura do seu ambiente no Render
-const DATABASE_URL = process.env.DATABASE_URL; 
-const STRIPE_SECRET = process.env.STRIPE_SECRET;
-const STRIPE_PRICE_ID = process.env.STRIPE_PRICE_ID;
-const JWT_SECRET = process.env.JWT_SECRET;
-// ----------------------------------------
-
-// Configuração do PostgreSQL
+// Configuração do Banco de Dados PostgreSQL (usando a variável de ambiente do Render)
 const pool = new Pool({
-    connectionString: DATABASE_URL,
+    connectionString: process.env.DATABASE_URL,
     ssl: {
-        // Isso é crucial para conectar ao Postgres do Render
-        rejectUnauthorized: false
+        rejectUnauthorized: false // Necessário para conexões com o Render/DigitalOcean
     }
 });
 
-// Middlewares
-app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: true }));
-// Middleware para permitir acesso de outros domínios (CORS) - Se precisar
-// const cors = require('cors');
-// app.use(cors());
-
-// =======================================================
-// 1. ROTA RAIZ (PÁGINA INICIAL)
-// Serve o arquivo eduard.html para corrigir o erro "Cannot GET /"
-// =======================================================
+// --- Rota Principal: Serve a Página de Vendas Corrigida ---
 app.get('/', (req, res) => {
-    // Servindo o arquivo 'eduard.html' que está no seu repositório
-    res.sendFile(path.join(__dirname, 'eduard.html')); 
+    // ATENÇÃO: Verifique se o nome do arquivo HTML na sua pasta é "edu.html"
+    // Caso contrário, renomeie o arquivo HTML que você corrigiu para "edu.html"
+    res.sendFile(path.join(__dirname, 'edu.html')); 
 });
 
-// =======================================================
-// 2. EXEMPLO DE ROTA DE API
-// Use esta rota como base para suas rotas de login, cadastro, etc.
-// =======================================================
+
+// --- Rota de Teste de Conexão com o Banco de Dados ---
+// Esta rota é útil para garantir que a variável DATABASE_URL está correta
 app.get('/api/teste-db', async (req, res) => {
     try {
-        // Exemplo: Conectar e fazer uma consulta simples
-        const client = await pool.connect();
-        const result = await client.query('SELECT NOW()'); // Consulta simples para testar a conexão
-        client.release();
-
+        await pool.query('SELECT 1');
         res.status(200).json({
             status: 'success',
             message: 'Conexão com o banco de dados OK!',
-            timestamp: result.rows[0].now
+            timestamp: new Date().toISOString()
         });
-
-    } catch (err) {
-        console.error("Erro ao conectar ou consultar o banco de dados:", err);
+    } catch (error) {
+        console.error('Erro ao conectar ao PostgreSQL:', error.message);
         res.status(500).json({
             status: 'error',
             message: 'Falha na conexão com o banco de dados.',
-            details: err.message
+            details: `Conexão com o banco de dados falhou: ${error.message}`
         });
     }
 });
 
-// =======================================================
-// 3. EXEMPLO DE USO DAS CHAVES DO STRIPE
-// Apenas para mostrar que a variável está acessível
-// =======================================================
-app.get('/api/stripe-config', (req, res) => {
-    res.status(200).json({
-        stripe_key_accessible: !!STRIPE_SECRET, // Retorna true se a chave estiver definida
-        price_id: STRIPE_PRICE_ID,
-        // Atenção: Nunca exponha a STRIPE_SECRET em produção!
-    });
-});
 
-
-// =======================================================
-// INICIALIZAÇÃO DO SERVIDOR
-// =======================================================
+// --- Inicialização do Servidor ---
 app.listen(PORT, () => {
-    console.log(`Servidor Node.js rodando na porta ${PORT}`);
-    console.log(`URL da aplicação: ${process.env.RENDER_EXTERNAL_URL || 'http://localhost:' + PORT}`);
+    console.log(`🚀 Servidor rodando na porta ${PORT}`);
+    console.log(`Acesse a aplicação em: http://localhost:${PORT}`);
 });
