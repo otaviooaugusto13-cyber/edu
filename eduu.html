@@ -3,58 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Vendas - Próxima Turma</title>
+    <title>Inscrição - Próxima Turma</title>
     <style>
+        /* Reset básico */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             background-color: #000;
             color: #fff;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            margin: 0;
             padding: 20px;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
         }
+
+        /* --- IMAGEM PARA COMPUTADOR --- */
+        @media (min-width: 769px) {
+            body {
+                /* Substitua pelo link da sua foto horizontal para PC */
+                background-image: url('SUA_FOTO_PC_AQUI.jpg');
+            }
+        }
+
+        /* --- IMAGEM PARA CELULAR (Sua foto do GitHub) --- */
+        @media (max-width: 768px) {
+            body {
+                background-image: url('https://raw.githubusercontent.com/otaviooaugusto13-cyber/edu/main/edu%20podcast.jpg');
+                background-position: top center; /* Garante que seu rosto apareça no topo */
+            }
+        }
+
+        /* Container com efeito de vidro */
         .container {
-            background-color: #222;
-            padding: 30px;
-            border-radius: 8px;
+            background-color: rgba(15, 15, 15, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px); /* Suporte para Safari */
+            padding: 40px 30px;
+            border-radius: 15px;
             width: 100%;
-            max-width: 400px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-        }
-        h2 {
+            max-width: 420px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
-            margin-bottom: 25px;
-            color: #ffc107;
-            font-size: 1.5em;
         }
+
+        h2 {
+            margin-bottom: 30px;
+            color: #ffc107;
+            font-size: 1.6em;
+            font-weight: 800;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
         input {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #444;
-            border-radius: 4px;
-            box-sizing: border-box;
-            background-color: #333;
+            padding: 15px;
+            margin-bottom: 18px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.05);
             color: #fff;
-            font-size: 1em;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
         }
+
+        input:focus {
+            outline: none;
+            border-color: #ffc107;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
         button {
             width: 100%;
-            padding: 15px;
+            padding: 18px;
             background-color: #ffc107;
             color: #000;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
             font-size: 1.1em;
-            transition: background-color 0.3s;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            margin-top: 10px;
         }
+
         button:hover {
-            background-color: #e0a800;
+            background-color: #ffca2c;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        /* Ajuste para inputs no celular não dar zoom indesejado */
+        @media screen and (max-width: 480px) {
+            h2 { font-size: 1.4em; }
+            input { font-size: 16px; } 
         }
     </style>
 </head>
@@ -64,18 +123,17 @@
         <h2>RESERVE SUA VAGA E VÁ PARA O PAGAMENTO</h2>
 
         <form 
-            action="[COLOQUE SEU CÓDIGO FORMREE AQUI (Ex: https://formspree.io/f/xyznmr)]" 
+            action="https://formspree.io/f/xyznmr" 
             method="POST"
         >
             <input type="text" name="nome" placeholder="Seu Nome Completo" required>
             <input type="email" name="email" placeholder="Seu Melhor Email" required>
-            <input type="text" name="telefone" placeholder="Seu Telefone/WhatsApp" required>
+            <input type="tel" name="telefone" placeholder="Seu WhatsApp (com DDD)" required>
 
-            <input type="hidden" name="_next" value="[COLOQUE SUA URL DE CHECKOUT DA HOTMART AQUI (Ex: https://pay.hotmart.com/Y103400130Y)]"> 
-            
-            <input type="hidden" name="_subject" value="Novo Lead Capturado - Landing Page">
+            <input type="hidden" name="_next" value="https://pay.hotmart.com/Y103400130Y"> 
+            <input type="hidden" name="_subject" value="Novo Lead - Landing Page Edu Podcast">
 
-            <button type="submit">FINALIZAR INSCRIÇÃO E IR PARA O PAGAMENTO</button>
+            <button type="submit">QUERO MINHA VAGA AGORA</button>
         </form>
     </div>
 
