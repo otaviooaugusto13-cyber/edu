@@ -3,50 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscrição - Próxima Turma</title>
+    <title>Inscrição - Praticamente</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background-color: #000;
+            background-color: #000; /* Fundo principal preto */
             color: #fff;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
             min-height: 100vh;
             display: flex;
-            flex-direction: column; /* Alinha itens em coluna */
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* --- EFEITO VIDRO FUMÊ NO CABEÇALHO --- */
+        /* --- CABEÇALHO VIDRO FUMÊ --- */
         header {
             width: 100%;
-            position: fixed; /* Fixa no topo */
+            position: fixed;
             top: 0;
             left: 0;
             padding: 15px 0;
             text-align: center;
             z-index: 10;
-            
-            /* Estilo Fumê */
-            background: rgba(0, 0, 0, 0.6); /* Cor preta com 60% de opacidade */
-            backdrop-filter: blur(10px);    /* Desfoque do fundo */
-            -webkit-backdrop-filter: blur(10px); /* Suporte para Safari */
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Linha fina de brilho */
+            background: rgba(0, 0, 0, 0.7); /* Fumê escuro */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 123, 255, 0.3); /* Borda azul sutil */
         }
 
-        header h1 {
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            color: #ffc107;
+        .logo-texto {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        /* --- FUNDOS --- */
+        /* Cores solicitadas para o nome */
+        .azul-destaque { color: #007bff; } /* Azul vibrante */
+        .cinza-destaque { color: #a0a0a0; } /* Cinza médio */
+
+        /* --- CONFIGURAÇÃO DE FUNDOS --- */
         @media (max-width: 768px) {
             body {
-                background-image: url('https://raw.githubusercontent.com/otaviooaugusto13-cyber/edu/main/eduardo.png');
+                background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://raw.githubusercontent.com/otaviooaugusto13-cyber/edu/main/eduardo.png');
                 background-size: contain;
                 background-repeat: no-repeat;
                 background-position: bottom right;
@@ -55,76 +58,104 @@
 
         @media (min-width: 769px) {
             body {
-                background-image: url('SUA_FOTO_PC.jpg'); 
+                background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('SUA_FOTO_PC.jpg'); 
                 background-size: cover;
                 background-position: center;
             }
         }
 
-        /* Container do Formulário */
+        /* --- CONTAINER DO FORMULÁRIO --- */
         .container {
-            background-color: rgba(20, 20, 20, 0.85);
-            backdrop-filter: blur(15px);
-            padding: 35px;
-            border-radius: 15px;
+            background-color: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 20px;
             width: 90%;
-            max-width: 380px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+            max-width: 400px;
+            border: 1px solid rgba(0, 123, 255, 0.2); /* Borda azulada */
+            box-shadow: 0 0 30px rgba(0, 123, 255, 0.15); /* Brilho neon azul sutil */
             z-index: 2;
-            margin-top: 80px; /* Espaço para não cobrir o header fixo */
+            margin-top: 100px;
+            margin-bottom: 40px;
         }
 
         h2 {
-            color: #ffc107;
+            color: #fff;
             text-align: center;
-            margin-bottom: 25px;
-            font-size: 1.4em;
-            text-transform: uppercase;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+            line-height: 1.4;
+            font-weight: 400;
         }
 
+        h2 b {
+            color: #007bff; /* Destaque azul no texto do form */
+        }
+
+        /* --- INPUTS --- */
         input {
             width: 100%;
-            padding: 14px;
-            margin-bottom: 15px;
-            border: 1px solid #444;
-            border-radius: 8px;
-            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            margin-bottom: 18px;
+            border: 1px solid #333;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
             color: #fff;
-        }
-
-        button {
-            width: 100%;
-            padding: 16px;
-            background-color: #ffc107;
-            color: #000;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            text-transform: uppercase;
+            outline: none;
             transition: 0.3s;
         }
 
+        input:focus {
+            border-color: #007bff;
+            background: rgba(0, 123, 255, 0.05);
+        }
+
+        /* --- BOTÃO AZUL --- */
+        button {
+            width: 100%;
+            padding: 18px;
+            background-color: #007bff; /* Azul */
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+
         button:hover {
-            background-color: #e0a800;
-            transform: scale(1.02);
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.5);
+        }
+
+        button:active {
+            transform: scale(0.98);
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>MATRÍCULAS ABERTAS</h1>
+        <div class="logo-texto">
+            <span class="azul-destaque">PRATICAMENTE</span> 
+            <span class="azul-destaque">PRATICA</span> 
+            <span class="cinza-destaque">MENTE</span>
+        </div>
     </header>
 
     <div class="container">
-        <h2>RESERVE SUA VAGA E VÁ PARA O PAGAMENTO</h2>
+        <h2>RESERVE SUA VAGA E VÁ PARA O <b>PAGAMENTO</b></h2>
         <form action="https://formspree.io/f/xyznmr" method="POST">
             <input type="text" name="nome" placeholder="Seu Nome Completo" required>
             <input type="email" name="email" placeholder="Seu Melhor Email" required>
             <input type="tel" name="telefone" placeholder="Seu WhatsApp" required>
+            
             <input type="hidden" name="_next" value="https://pay.hotmart.com/Y103400130Y">
+            
             <button type="submit">QUERO MINHA VAGA AGORA</button>
         </form>
     </div>
