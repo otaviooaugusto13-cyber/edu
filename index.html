@@ -5,167 +5,147 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Praticamente - Inscrição</title>
     <style>
-        /* RESET BÁSICO */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        /* RESET */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background-color: #000; /* Fundo Preto */
-            color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000000; /* Fundo totalmente preto */
+            color: #ffffff;
+            font-family: 'Segoe UI', Arial, sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* --- FUNDOS DINÂMICOS --- */
-        @media (max-width: 768px) {
-            body {
-                background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://raw.githubusercontent.com/otaviooaugusto13-cyber/edu/main/eduardo.png');
-                background-size: contain;
-                background-repeat: no-repeat;
-                background-position: bottom right;
-            }
-        }
-        @media (min-width: 769px) {
-            body {
-                background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('SUA_FOTO_PC.jpg'); 
-                background-size: cover;
-                background-position: center;
-            }
-        }
-
-        /* --- CABEÇALHO VIDRO FUMÊ --- */
-        .glass-header {
+        /* --- CABEÇALHO VIDRO FUMÊ (FIXO) --- */
+        .header-glass {
             width: 100%;
             position: fixed;
             top: 0;
             left: 0;
             padding: 20px 0;
             text-align: center;
-            z-index: 100;
+            z-index: 1000;
             
-            /* Efeito Vidro */
-            background: rgba(0, 0, 0, 0.6); 
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(0, 123, 255, 0.2);
+            /* Efeito Fumê */
+            background: rgba(0, 0, 0, 0.75); 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 123, 255, 0.3); /* Linha azul fina */
         }
 
-        .logo-text {
-            font-size: 1.4rem;
-            font-weight: 900;
-            letter-spacing: 2px;
+        .logo-box {
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
         }
 
-        .azul { color: #007bff; }  /* Azul da Logo */
-        .cinza { color: #888888; } /* Cinza Mente */
+        /* Cores solicitadas */
+        .text-blue { color: #007bff; }
+        .text-gray { color: #888888; }
+
+        /* --- FUNDOS --- */
+        @media (max-width: 768px) {
+            body {
+                background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
+                                  url('https://raw.githubusercontent.com/otaviooaugusto13-cyber/edu/main/eduardo.png');
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: bottom right;
+            }
+        }
 
         /* --- CONTAINER DO FORMULÁRIO --- */
-        .form-container {
-            background: rgba(15, 15, 15, 0.8);
+        .main-container {
+            background: rgba(15, 15, 15, 0.85);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 123, 255, 0.3);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 40px 30px;
             border-radius: 20px;
-            padding: 40px;
             width: 90%;
             max-width: 400px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 123, 255, 0.1);
+            border: 1px solid rgba(0, 123, 255, 0.2);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 123, 255, 0.1);
             z-index: 10;
-            margin-top: 80px; /* Para não ficar embaixo do header */
+            margin-top: 100px; /* Evita o header */
         }
 
         h2 {
-            font-size: 1.1rem;
             text-align: center;
+            font-size: 1.1rem;
             margin-bottom: 30px;
-            line-height: 1.5;
-            color: #eee;
+            color: #f0f0f0;
+            line-height: 1.4;
         }
 
-        h2 span {
-            color: #007bff;
-            font-weight: bold;
-        }
+        h2 span { color: #007bff; font-weight: bold; }
 
-        /* --- CAMPOS DE ENTRADA --- */
-        .input-group {
-            margin-bottom: 20px;
-        }
-
+        /* --- INPUTS --- */
         input {
             width: 100%;
             padding: 15px;
-            border-radius: 10px;
+            margin-bottom: 15px;
             border: 1px solid #333;
+            border-radius: 10px;
             background: rgba(255, 255, 255, 0.05);
             color: #fff;
-            font-size: 1rem;
-            transition: 0.3s;
             outline: none;
+            transition: 0.3s;
         }
 
         input:focus {
             border-color: #007bff;
             background: rgba(0, 123, 255, 0.05);
-            box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
         }
 
         /* --- BOTÃO AZUL --- */
-        .btn-submit {
+        .btn-action {
             width: 100%;
             padding: 18px;
             background-color: #007bff;
             color: #fff;
             border: none;
             border-radius: 10px;
-            font-weight: bold;
-            font-size: 1rem;
+            font-weight: 800;
+            font-size: 0.95rem;
             cursor: pointer;
             text-transform: uppercase;
             transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+            margin-top: 10px;
         }
 
-        .btn-submit:hover {
+        .btn-action:hover {
             background-color: #0056b3;
-            transform: scale(1.02);
-            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.5);
         }
     </style>
 </head>
 <body>
 
-    <header class="glass-header">
-        <div class="logo-text">
-            <span class="azul">PRATICAMENTE PRATICA</span><span class="cinza">MENTE</span>
+    <header class="header-glass">
+        <div class="logo-box">
+            <span class="text-blue">PRATICAMENTE PRATICA</span><span class="text-gray">MENTE</span>
         </div>
     </header>
 
-    <div class="form-container">
+    <div class="main-container">
         <h2>RESERVE SUA VAGA E VÁ PARA O <span>PAGAMENTO</span></h2>
         
         <form action="https://formspree.io/f/xyznmr" method="POST">
-            <div class="input-group">
-                <input type="text" name="nome" placeholder="Nome Completo" required>
-            </div>
-            <div class="input-group">
-                <input type="email" name="email" placeholder="E-mail Principal" required>
-            </div>
-            <div class="input-group">
-                <input type="tel" name="telefone" placeholder="WhatsApp" required>
-            </div>
+            <input type="text" name="nome" placeholder="Seu Nome Completo" required>
+            <input type="email" name="email" placeholder="Seu Melhor E-mail" required>
+            <input type="tel" name="telefone" placeholder="Seu WhatsApp" required>
             
             <input type="hidden" name="_next" value="https://pay.hotmart.com/Y103400130Y">
             
-            <button type="submit" class="btn-submit">QUERO MINHA VAGA AGORA</button>
+            <button type="submit" class="btn-action">QUERO MINHA VAGA AGORA</button>
         </form>
     </div>
 
