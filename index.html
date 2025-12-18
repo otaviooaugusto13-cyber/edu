@@ -13,24 +13,46 @@
             font-family: 'Segoe UI', Arial, sans-serif;
             min-height: 100vh;
             display: flex;
+            flex-direction: column; /* Alinha itens em coluna */
             justify-content: center;
             align-items: center;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* --- FUNDO PARA CELULAR (Sua foto sem fundo) --- */
+        /* --- EFEITO VIDRO FUMÊ NO CABEÇALHO --- */
+        header {
+            width: 100%;
+            position: fixed; /* Fixa no topo */
+            top: 0;
+            left: 0;
+            padding: 15px 0;
+            text-align: center;
+            z-index: 10;
+            
+            /* Estilo Fumê */
+            background: rgba(0, 0, 0, 0.6); /* Cor preta com 60% de opacidade */
+            backdrop-filter: blur(10px);    /* Desfoque do fundo */
+            -webkit-backdrop-filter: blur(10px); /* Suporte para Safari */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Linha fina de brilho */
+        }
+
+        header h1 {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: #ffc107;
+        }
+
+        /* --- FUNDOS --- */
         @media (max-width: 768px) {
             body {
-                /* Usando a imagem PNG que permite transparência */
                 background-image: url('https://raw.githubusercontent.com/otaviooaugusto13-cyber/edu/main/eduardo.png');
-                background-size: contain; /* Mantém sua proporção sem cortar */
+                background-size: contain;
                 background-repeat: no-repeat;
-                background-position: bottom right; /* Coloca você no canto inferior */
+                background-position: bottom right;
             }
         }
 
-        /* --- FUNDO PARA PC --- */
         @media (min-width: 769px) {
             body {
                 background-image: url('SUA_FOTO_PC.jpg'); 
@@ -49,7 +71,8 @@
             max-width: 380px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
-            z-index: 2; /* Garante que o formulário fique na frente da foto */
+            z-index: 2;
+            margin-top: 80px; /* Espaço para não cobrir o header fixo */
         }
 
         h2 {
@@ -90,6 +113,10 @@
     </style>
 </head>
 <body>
+
+    <header>
+        <h1>MATRÍCULAS ABERTAS</h1>
+    </header>
 
     <div class="container">
         <h2>RESERVE SUA VAGA E VÁ PARA O PAGAMENTO</h2>
