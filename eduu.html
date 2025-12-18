@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscrição - Praticamente</title>
+    <title>Praticamente - Inscrição</title>
     <style>
+        /* RESET */
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background-color: #000; /* Fundo principal preto */
-            color: #fff;
-            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background-color: #000000; /* Fundo totalmente preto */
+            color: #ffffff;
+            font-family: 'Segoe UI', Arial, sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -20,83 +21,75 @@
             position: relative;
         }
 
-        /* --- CABEÇALHO VIDRO FUMÊ --- */
-        header {
+        /* --- CABEÇALHO VIDRO FUMÊ (FIXO) --- */
+        .header-glass {
             width: 100%;
             position: fixed;
             top: 0;
             left: 0;
-            padding: 15px 0;
+            padding: 20px 0;
             text-align: center;
-            z-index: 10;
-            background: rgba(0, 0, 0, 0.7); /* Fumê escuro */
+            z-index: 1000;
+            
+            /* Efeito Fumê */
+            background: rgba(0, 0, 0, 0.75); 
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0, 123, 255, 0.3); /* Borda azul sutil */
+            border-bottom: 1px solid rgba(0, 123, 255, 0.3); /* Linha azul fina */
         }
 
-        .logo-texto {
-            font-size: 1.5rem;
+        .logo-box {
+            font-size: 1.3rem;
             font-weight: 800;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
         }
 
-        /* Cores solicitadas para o nome */
-        .azul-destaque { color: #007bff; } /* Azul vibrante */
-        .cinza-destaque { color: #a0a0a0; } /* Cinza médio */
+        /* Cores solicitadas */
+        .text-blue { color: #007bff; }
+        .text-gray { color: #888888; }
 
-        /* --- CONFIGURAÇÃO DE FUNDOS --- */
+        /* --- FUNDOS --- */
         @media (max-width: 768px) {
             body {
-                background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://raw.githubusercontent.com/otaviooaugusto13-cyber/edu/main/eduardo.png');
+                background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
+                                  url('https://raw.githubusercontent.com/otaviooaugusto13-cyber/edu/main/eduardo.png');
                 background-size: contain;
                 background-repeat: no-repeat;
                 background-position: bottom right;
             }
         }
 
-        @media (min-width: 769px) {
-            body {
-                background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('SUA_FOTO_PC.jpg'); 
-                background-size: cover;
-                background-position: center;
-            }
-        }
-
         /* --- CONTAINER DO FORMULÁRIO --- */
-        .container {
-            background-color: rgba(10, 10, 10, 0.8);
+        .main-container {
+            background: rgba(15, 15, 15, 0.85);
             backdrop-filter: blur(20px);
-            padding: 40px;
+            -webkit-backdrop-filter: blur(20px);
+            padding: 40px 30px;
             border-radius: 20px;
             width: 90%;
             max-width: 400px;
-            border: 1px solid rgba(0, 123, 255, 0.2); /* Borda azulada */
-            box-shadow: 0 0 30px rgba(0, 123, 255, 0.15); /* Brilho neon azul sutil */
-            z-index: 2;
-            margin-top: 100px;
-            margin-bottom: 40px;
+            border: 1px solid rgba(0, 123, 255, 0.2);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 123, 255, 0.1);
+            z-index: 10;
+            margin-top: 100px; /* Evita o header */
         }
 
         h2 {
-            color: #fff;
             text-align: center;
+            font-size: 1.1rem;
             margin-bottom: 30px;
-            font-size: 1.2rem;
+            color: #f0f0f0;
             line-height: 1.4;
-            font-weight: 400;
         }
 
-        h2 b {
-            color: #007bff; /* Destaque azul no texto do form */
-        }
+        h2 span { color: #007bff; font-weight: bold; }
 
         /* --- INPUTS --- */
         input {
             width: 100%;
             padding: 15px;
-            margin-bottom: 18px;
+            margin-bottom: 15px;
             border: 1px solid #333;
             border-radius: 10px;
             background: rgba(255, 255, 255, 0.05);
@@ -111,52 +104,48 @@
         }
 
         /* --- BOTÃO AZUL --- */
-        button {
+        .btn-action {
             width: 100%;
             padding: 18px;
-            background-color: #007bff; /* Azul */
+            background-color: #007bff;
             color: #fff;
             border: none;
             border-radius: 10px;
-            font-weight: bold;
-            font-size: 1rem;
+            font-weight: 800;
+            font-size: 0.95rem;
             cursor: pointer;
             text-transform: uppercase;
-            transition: all 0.3s ease;
+            transition: 0.3s;
             box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+            margin-top: 10px;
         }
 
-        button:hover {
+        .btn-action:hover {
             background-color: #0056b3;
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0, 123, 255, 0.5);
-        }
-
-        button:active {
-            transform: scale(0.98);
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-texto">
-            <span class="azul-destaque">PRATICAMENTE</span> 
-            <span class="azul-destaque">PRATICA</span> 
-            <span class="cinza-destaque">MENTE</span>
+    <header class="header-glass">
+        <div class="logo-box">
+            <span class="text-blue">PRATICAMENTE PRATICA</span><span class="text-gray">MENTE</span>
         </div>
     </header>
 
-    <div class="container">
-        <h2>RESERVE SUA VAGA E VÁ PARA O <b>PAGAMENTO</b></h2>
+    <div class="main-container">
+        <h2>RESERVE SUA VAGA E VÁ PARA O <span>PAGAMENTO</span></h2>
+        
         <form action="https://formspree.io/f/xyznmr" method="POST">
             <input type="text" name="nome" placeholder="Seu Nome Completo" required>
-            <input type="email" name="email" placeholder="Seu Melhor Email" required>
+            <input type="email" name="email" placeholder="Seu Melhor E-mail" required>
             <input type="tel" name="telefone" placeholder="Seu WhatsApp" required>
             
             <input type="hidden" name="_next" value="https://pay.hotmart.com/Y103400130Y">
             
-            <button type="submit">QUERO MINHA VAGA AGORA</button>
+            <button type="submit" class="btn-action">QUERO MINHA VAGA AGORA</button>
         </form>
     </div>
 
